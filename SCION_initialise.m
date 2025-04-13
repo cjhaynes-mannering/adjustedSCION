@@ -180,7 +180,7 @@ function run = SCION_initialise(runcontrol)
     end
 
     %%%% load INTERPSTACK
-    load( 'forcings/INTERPSTACK_oct_2021.mat' ) ;
+    load( 'INTERPSTACK_oct_2021.mat' ) ;
 
     %%%% relative contribution from latitude bands
     lat_areas = (cosd(INTERPSTACK.lat))' ;
@@ -189,22 +189,22 @@ function run = SCION_initialise(runcontrol)
     end
 
     %%%% load COPSE reloaded forcing set
-    load( 'forcings/COPSE_forcings.mat' ) 
+    load( 'COPSE_forcings.mat' ) 
     %%%% new BA 
-    forcings.GR_BA = xlsread('forcings/GR_BA.xlsx','','','basic') ;
+    forcings.GR_BA = xlsread('GR_BA.xlsx','','','basic') ;
     forcings.GR_BA(:,1) = forcings.GR_BA(:,1)*1e6 ; %%% correct Myr
     %%%% new GA
-    forcings.newGA = xlsread('forcings/GA_revised.xlsx','','','basic') ;
+    forcings.newGA = xlsread('GA_revised.xlsx','','','basic') ;
     forcings.newGA(:,1) = forcings.newGA(:,1)*1e6 ; %%% correct Myr
     %%%% degassing rate
-    load('forcings/combined_D_force_oct_2021.mat') ;
+    load('combined_D_force_oct_2021.mat') ;
     forcings.D_force_x = D_force_x ;
     forcings.D_force_mid = D_force_mid ;
     forcings.D_force_min = D_force_min ;
     forcings.D_force_max = D_force_max ;
     
     %%%% load shoreline forcing
-    load('forcings/shoreline.mat') ;
+    load('shoreline.mat') ;
     forcings.shoreline_time = shoreline_time ;
     forcings.shoreline_relative = shoreline_relative ;
     
@@ -214,11 +214,11 @@ function run = SCION_initialise(runcontrol)
         endtime = toc ;
         fprintf('time (s): %d \n', endtime )
     end
-    load(['forcings/plant_430.mat']) ;
+    load(['plant_430.mat']) ;
     forcings.plant_430 = plant_430 ;
-    load(['forcings/plant_400.mat']) ;
+    load(['plant_400.mat']) ;
     forcings.plant_400 = plant_400 ;
-    load(['forcings/plant_370.mat']) ;
+    load(['plant_370.mat']) ;
     forcings.plant_370 = plant_370 ;
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
