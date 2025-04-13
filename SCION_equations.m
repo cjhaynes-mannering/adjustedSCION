@@ -235,40 +235,6 @@ land_past = INTERPSTACK.land(:,:,key_past_index) ;
 land_future = INTERPSTACK.land(:,:,key_future_index) ; 
 
 
-%%%% land occupied by plants
-if key_past_index < 5
-    plants_past = 0 ;
-end
-if key_future_index < 5
-    plants_future = 0 ;
-end   
-if key_past_index == 5
-    plants_past = forcings.plant_430 ;
-end
-if key_future_index == 5
-    plants_future = forcings.plant_430 ;
-end
-if key_past_index == 6
-    plants_past = forcings.plant_400 ;
-end
-if key_future_index == 6
-    plants_future = forcings.plant_400 ;
-end   
-if key_past_index == 7
-    plants_past = forcings.plant_370 ;
-end
-if key_future_index == 7
-    plants_future = forcings.plant_370 ;
-end       
-if key_past_index > 7
-    plants_past = land_past ;
-end
-if key_future_index > 7
-    plants_future = land_future ;
-end   
-% %%%% akternative with plants everywhere
-% plants_future = land_future ;
-% plants_past = land_past ;
 
 %%%% gridbox area
 GRID_AREA_km2 = INTERPSTACK.gridarea ;
@@ -371,35 +337,49 @@ TEMP_gast = Tsurf ;
 V = VEG ;
 f_biota = ( 1 - min( V*W , 1 ) ) * PREPLANT * (RCO2^0.5) + (V*W) ;
 
-%%f_biotamultiplier
-  
-% if plants_past == forcings.plant_430
-%   f_biota_past = (0.8 .* f_biota) .* plants_past ;
-%end
-%if plants_future == forcings.plant_430 
-%   f_biota_future = (0.8 .* f_biota) .* plants_future ;
-%end
-%if plants_past == forcings.plant_400 
-%    f_biota_past = (1.2 .* f_biota) .* plants_past ;;
-%end
-%if plants_future == forcings.plant_400 
-%    f_biota_future = (1.2 .* f_biota) .* plants_future ;
-%end   
-%if plants_past == forcings.plant_370 
-%    f_biota_past = (1.5 .* f_biota) .* plants_past ;
-%end
-%if plants_future == forcings.plant_370 
-%    f_biota_future = (1.5 .* f_biota) .* plants_future ;
 
+
+%%%% land occupied by plants
+if key_past_index < 5
+    plants_past = land_past ;
+end
+if key_future_index < 5
+    plants_future = land_future ;
+end   
+if key_past_index == 5
+    plants_past = forcings.plant_430 ;
+end
+if key_future_index == 5
+    plants_future = forcings.plant_430 ;
+end
+if key_past_index == 6
+    plants_past = forcings.plant_400 ;
+end
+if key_future_index == 6
+    plants_future = forcings.plant_400 ;
+end   
+if key_past_index == 7
+    plants_past = forcings.plant_370 ;
+end
+if key_future_index == 7
+    plants_future = forcings.plant_370 ;
+end       
+if key_past_index > 7
+    plants_past = land_past ;
+end
+if key_future_index > 7
+    plants_future = land_future ;
+end   
+
+% %%%% aternative with plants everywhere
+plants_future = land_future ;
+plants_past = land_past ;
 
 
 %%%%% apply f biota value only to vegetated part of grid
-f_biota_past = (0.8 .* f_biota) .* plants_past ;
-f_biota_future = (0.8 .* f_biota) .* plants_future ;
+f_biota_past = ( f_biota) .* plants_past ;
+f_biota_future = ( f_biota) .* plants_future ;
 
-%%%%% apply f biota value only to vegetated part of grid
-%f_biota_past = (f_biota) .* plants_past ;
-%f_biota_future = (f_biota) .* plants_future ;
 
 
 %%%% CW total
